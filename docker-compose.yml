@@ -7,6 +7,12 @@ services:
   claim_process:
     image: takehome/claims_process:0.0.1
     build: .
+    environment:
+      - POSTGRES_USER=super123
+      - POSTGRES_PASSWORD=secret456
+      - POSTGRES_SERVER=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=takehome
     command: bin/backend --host 0.0.0.0 --port 8080
     volumes:
       - .:/code
