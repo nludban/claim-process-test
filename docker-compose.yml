@@ -1,0 +1,44 @@
+# docker-compose.yml
+
+version: '3.9'
+
+services:
+
+  claim_process:
+    image: takehome/claims_process:0.0.1
+    build: .
+    command: bin/backend --host 0.0.0.0 --port 8080
+    volumes:
+      - .:/code
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16.2
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=super123
+      - POSTGRES_PASSWORD=secret456
+      - POSTGRES_DB=takehome
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U super123 -d takehome"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
+volumes:
+  postgres_data:

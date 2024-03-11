@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Assume docker-compose healthcheck is pretty close.
+#sleep 10
+
+# pg_isready checks access to the desired database.
+sleep 1
+
+exit 0
+
+# Not working docker/Mac...
+while !</dev/tcp/db/5432
+  do sleep 1
+done

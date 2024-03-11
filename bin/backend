@@ -1,0 +1,5 @@
+#!/bin/sh
+
+bin/wait_for_postgres
+
+exec uvicorn backend_exe.main:app "$@"
