@@ -6,6 +6,9 @@ Trying something new by adapting a
 [quasi-standard four layer architecture](https://github.com/nludban/pyramids-python-architecture)
 to FastAPI based microservices using docker compose...
 
+Note it's a mono-repo with multiple microservices running inside backend_exe.main...
+
+
 ## Build
 
 ```docker build . -f backend_exe/Dockerfile -t takehome/claims_process:0.0.1```
@@ -14,6 +17,8 @@ to FastAPI based microservices using docker compose...
 ## Run
 
 ```docker-compose  -f docker-compose.yml up```
+
+[ ] Create and use separate DB credentials for application.
 
 
 ## Web Access
@@ -29,10 +34,10 @@ http://localhost:8081/ -- adminer DB UI (see settings below)
 
 ### Claim Process (service)
 
-- [ ] Generate a unique ID
-- [ ] Calculate net fee (provider fee + coinsurance + copay - allowed)
-- [ ] Send net fee to Payments service
-  - [ ] Recover on failure
+- [x] Generate a unique ID
+- [x] Calculate net fee (provider fee + coinsurance + copay - allowed)
+- [-] Send net fee to Payments service
+  - [-] Recover on failure
 
 
 ### Payments (service)
@@ -65,7 +70,7 @@ http://localhost:8081/ -- adminer DB UI (see settings below)
 | member copay        | $0.00        | USD
 
 
-### Claims (table)
+### [x] Claims (table)
 
 - Claim ID
 - Service Date
@@ -82,7 +87,7 @@ http://localhost:8081/ -- adminer DB UI (see settings below)
 Unique: NPI, group, subscriber, date, procedure.
 
 
-### Payments (table)
+### [x] Payments (table)
 
 - Claim ID (foreign key)
 - Net Fee
